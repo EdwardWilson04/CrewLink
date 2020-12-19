@@ -98,6 +98,10 @@ const store = new Store<ISettings>({
 		enableSpatialAudio: {
 			type: 'boolean',
 			default: true
+		},
+		adjustLiveOnDead:{
+			type: 'number',
+			default: 1,
 		}
 	}
 });
@@ -331,6 +335,18 @@ const Settings: React.FC<SettingsProps> = function ({ open, onClose }: SettingsP
 					Exit to apply changes
 				</span>
 			</div>
+			<div className="form-control m" style={{ color: '#ffa500', textAlign:"center"}} >
+				<label>Live Players Vol. when Dead</label>
+				<br/>
+				<input type="range" value={(settings.adjustLiveOnDead*100)}
+				onChange={(ev: React.FormEvent<HTMLInputElement>) => 
+					setSettings({
+					type: 'setOne',
+					action: ['adjustLiveOnDead', (ev.currentTarget.valueAsNumber/100)]
+					})
+				}
+				readOnly />
+			</div> 
 		</div>
 	</div>;
 };
